@@ -4,9 +4,13 @@ import ru.bzvs.sreact.model.Course;
 
 import java.util.List;
 
-public interface BusinessService {
+public interface CourseService {
 
     List<Course> findAll();
 
     Course deleteById(long id);
+
+    Course findById(long id);
+
+    Course save(Course course);
 }

@@ -43,7 +43,7 @@ class ListCoursesComponent extends Component {
     }
 
     updateCourseClicked(id) {
-        // useNavigate().push(`/courses/${id}`)
+        this.props.history.push(`/courses/${id}`)
     }
 
     addCourseClicked() {

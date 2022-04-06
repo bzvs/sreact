@@ -2,13 +2,13 @@ package ru.bzvs.sreact.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.bzvs.sreact.model.Course;
-import ru.bzvs.sreact.service.BusinessService;
+import ru.bzvs.sreact.service.CourseService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CoursesHardcodedService implements BusinessService {
+public class CoursesHardcodedService implements CourseService {
 
     private static final List<Course> courses = new ArrayList<>();
     private static long idCounter;
@@ -40,9 +40,21 @@ public class CoursesHardcodedService implements BusinessService {
         return null;
     }
 
-    private Course findById(long id) {
+    @Override
+    public Course findById(long id) {
         return courses.stream().
                 filter(course -> course.getId().equals(id)).
                 findFirst().orElse(null);
+    }
+
+    @Override
+    public Course save(Course course) {
+        if (course.getId() == -1 || course.getId() == 0) {
+            course.setId(++idCounter);
+        } else {
+            deleteById(course.getId());
+        }
+        courses.add(course);
+        return course;
     }
 }

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import ListCoursesComponent from "./ListCoursesComponent";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import CourseComponent from "./CourseComponent";
 
 class InstructorApp extends Component{
@@ -10,11 +10,11 @@ class InstructorApp extends Component{
             <Router>
                 <>
                     <h1>Instructor Application</h1>
-                    <Routes>
-                        <Route path="/" element={<ListCoursesComponent/>} />
-                        <Route path="/courses" element={<ListCoursesComponent/>} />
-                        <Route path="/courses/:id" element={<CourseComponent/>} />
-                    </Routes>
+                    <Switch>
+                        <Route path="/" exact component={props => <ListCoursesComponent {...props} />} />
+                        <Route path="/courses" exact component={props => <ListCoursesComponent {...props} />} />
+                        <Route path="/courses/:id" component={props => <CourseComponent {...props} />} />
+                    </Switch>
                 </>
             </Router>
         )
